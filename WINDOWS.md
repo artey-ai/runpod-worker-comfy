@@ -13,3 +13,13 @@
 10. sudo docker-compose up
 11. sudo docker login -u "seethroughlab" -p "mypassword" docker.io
 12. sudo docker push seethroughlab/runpod-worker-comfy:dev-base
+
+
+
+# Cleanup
+List Docker Containers		sudo docker ps -a
+Delete Docker Container		sudo docker remove [CONTAINER ID]
+List Docker Images			sudo docker image ls
+Delete Docker Image			sudo docker image rm [IMAGE ID]
+
+Prune system                sudo docker system prune

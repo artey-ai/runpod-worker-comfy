@@ -5,6 +5,9 @@ runpod_worker_comfy:
   clip_vision: models/clip_vision/
   configs: models/configs/
   controlnet: models/controlnet/
+  grounding-dino: models/grounding-dino
+  ipadapter: models/ipadapter/
+  sam2: models/sam2/
   embeddings: models/embeddings/
   loras: models/loras/
   upscale_models: models/upscale_models/

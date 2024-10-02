@@ -97,13 +97,13 @@ RUN chmod +x /start.sh
 #FROM base AS downloader
 
 # Copy the local comfyui folder to a temporary location on the image
-COPY ./comfyui /tmp/comfyui
+#COPY ./comfyui /tmp/comfyui
 
 # Merge the folders using rsync
-RUN rsync -a /tmp/comfyui/ /comfyui 
+#RUN rsync -a /tmp/comfyui/ /comfyui 
 
 # Remove the tmp copy
-RUN rm -rf /tmp/comfyui
+#RUN rm -rf /tmp/comfyui
 
 # # Change working directory to ComfyUI
 # WORKDIR /comfyui
