@@ -22,7 +22,7 @@
 	},
 	{
 		"folder": "models/controlnet/SDXL/controlnet-depth-sdxl-1.0",
-		"files": ["https://huggingface.co/diffusers/controlnet-depth-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"]
+		"files": ["https://huggingface.co/xinsir/controlnet-depth-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors"] 
 	},
 	{
 		"folder": "models/clip_vision",

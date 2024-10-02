@@ -79,7 +79,6 @@ RUN git clone https://github.com/risunobushi/comfyUI_FrequencySeparation_RGB-HSV
 ADD test_resources/images/bear.jpg test_resources/images/brad.jpg test_resources/images/ws.jpg /comfyui/input/
 
 
-
 # Install runpod
 RUN pip3 install runpod requests
 
@@ -94,14 +93,17 @@ ADD src/start.sh src/rp_handler.py test_input.json ./
 RUN chmod +x /start.sh
 
 
-# Copy the local folder to a temporary location
+# Stage 2: Download models
+#FROM base as downloader
+
+# Copy the local comfyui folder to a temporary location on the image
 COPY ./comfyui /tmp/comfyui
+
 # Merge the folders using rsync
-RUN rsync -a /tmp/comfyui/ /comfyui && rm -rf /tmp/comfyui
+RUN rsync -a /tmp/comfyui/ /comfyui 
 
-
-# # Stage 2: Download models
-# FROM base as downloader
+# Remove the tmp copy
+RUN rm -rf /tmp/comfyui
 
 # # Change working directory to ComfyUI
 # WORKDIR /comfyui
@@ -125,11 +127,11 @@ RUN rsync -a /tmp/comfyui/ /comfyui && rm -rf /tmp/comfyui
 #       wget --header="Authorization: Bearer ${HUGGINGFACE_ACCESS_TOKEN}" -O models/vae/ae.safetensors https://huggingface.co/black-forest-labs/FLUX.1-dev/resolve/main/ae.safetensors; \
 #     fi
 
-# # Stage 3: Final image
-# FROM base as final
+# Stage 3: Final image
+#FROM base as final
 
-# # Copy models from stage 2 to the final image
-# COPY --from=downloader /comfyui/models /comfyui/models
+# Copy models from stage 2 to the final image
+#COPY --from=downloader /comfyui/models /comfyui/models
 
 # Start the container
 CMD /start.sh
