@@ -725,12 +725,12 @@
               {
                 "name": "A",
                 "selected": true,
-                "url": "/api/view?filename=rgthree.compare._temp_hgcvz_00001_.png&type=temp&subfolder=&rand=0.797029512370738"
+                "url": "/api/view?filename=rgthree.compare._temp_qvpbl_00001_.png&type=temp&subfolder=&rand=0.6051780625558418"
               },
               {
                 "name": "B",
                 "selected": true,
-                "url": "/api/view?filename=rgthree.compare._temp_hgcvz_00002_.png&type=temp&subfolder=&rand=0.7153883307499551"
+                "url": "/api/view?filename=rgthree.compare._temp_qvpbl_00002_.png&type=temp&subfolder=&rand=0.6719487526220629"
               }
             ]
           },
@@ -1549,6 +1549,19 @@
         "class_type": "Switch any [Crystools]",
         "_meta": {
           "title": "Set to True for Hair"
+        }
+      },
+      "280": {
+        "inputs": {
+          "filename_prefix": "ComfyUI",
+          "images": [
+            "134",
+            0
+          ]
+        },
+        "class_type": "SaveImage",
+        "_meta": {
+          "title": "Save Image"
         }
       }
     }

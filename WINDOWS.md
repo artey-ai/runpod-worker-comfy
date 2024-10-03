@@ -23,3 +23,5 @@ List Docker Images			sudo docker image ls
 Delete Docker Image			sudo docker image rm [IMAGE ID]
 
 Prune system                sudo docker system prune
+
+Get a command line in a running container: sudo docker exec -it comfyui-worker /bin/bash
