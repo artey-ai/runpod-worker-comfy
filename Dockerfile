@@ -50,7 +50,7 @@ RUN git clone https://github.com/Ryuukeisyou/comfyui_face_parsing.git /comfyui/c
 RUN pip3 install -r /comfyui/custom_nodes/comfyui_face_parsing/requirements.txt
 # Add the face_parsing folder into the image so that we don't get download errors when it tries to automatically download the model
 # source: https://huggingface.co/jonathandinu/face-parsing/tree/main
-COPY data/face_parsing /comfyui/models/
+COPY ./data/face_parsing/ /comfyui/models/face_parsing/
 
 # install ComfyUI-SAM2
 RUN git clone https://github.com/neverbiasu/ComfyUI-SAM2.git /comfyui/custom_nodes/ComfyUI-SAM2
