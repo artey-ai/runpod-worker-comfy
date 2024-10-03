@@ -41,11 +41,16 @@ RUN python3 /comfyui/custom_nodes/ComfyUI-Impact-Pack/install.py
 # Install comfyui_controlnet_aux
 RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git /comfyui/custom_nodes/comfyui_controlnet_aux
 RUN pip3 install -r /comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt  
+# Add them odel into the image so that we don't get download errors when it tries to automatically download the model
+# source: https://huggingface.co/depth-anything/Depth-Anything-V2-Large/resolve/main/depth_anything_v2_vitl.pth
 ADD data/depth_anything_v2_vitl.pth /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large/
 
 # Install comfyui_face_parsing
 RUN git clone https://github.com/Ryuukeisyou/comfyui_face_parsing.git /comfyui/custom_nodes/comfyui_face_parsing
 RUN pip3 install -r /comfyui/custom_nodes/comfyui_face_parsing/requirements.txt
+# Add the face_parsing folder into the image so that we don't get download errors when it tries to automatically download the model
+# source: https://huggingface.co/jonathandinu/face-parsing/tree/main
+COPY data/face_parsing /comfyui/models/
 
 # install ComfyUI-SAM2
 RUN git clone https://github.com/neverbiasu/ComfyUI-SAM2.git /comfyui/custom_nodes/ComfyUI-SAM2
