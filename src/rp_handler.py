@@ -327,6 +327,8 @@ def handler(job):
 
             # Exit the loop if we have found the history
             if prompt_id in history and history[prompt_id].get("outputs"):
+                print(f"runpod-worker-comfy - found history with outputs")
+                print(history[prompt_id].get("outputs"))
                 break
             else:
                 # Wait before trying again
