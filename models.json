@@ -1,9 +1,5 @@
 [
 	{
-		"folder": "custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything",
-		"files": ["https://huggingface.co/depth-anything/Depth-Anything-V2-Large/resolve/main/depth_anything_v2_vitl.pth"]
-	},
-	{
 		"folder": "models/grounding-dino",
 		"files": [
 			"https://huggingface.co/ShilongLiu/GroundingDINO/resolve/main/GroundingDINO_SwinT_OGC.cfg.py", 
@@ -81,15 +77,6 @@
 	{
 		"folder": "models/ultralytics/bbox",
 		"files": ["https://huggingface.co/Bingsu/adetailer/resolve/main/face_yolov8m.pt"]
-	},
-	{
-		"folder": "models/face_parsing",
-		"files": [
-			"https://huggingface.co/jonathandinu/face-parsing/resolve/main/model.safetensors",
-			"https://huggingface.co/jonathandinu/face-parsing/resolve/main/quantize_config.json",
-			"https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json",
-			"https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json"
-		]
 	}
 ]
 
