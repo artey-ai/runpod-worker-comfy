@@ -11,8 +11,8 @@
 8. cd runpod-worker-comfy
 9. sudo docker build --no-cache -t seethroughlab/runpod-worker-comfy:v0.1 --platform linux/amd64 .
 10. sudo docker-compose up
-11. sudo docker login -u "seethroughlab" -p "mypassword" docker.io
-12. sudo docker push seethroughlab/runpod-worker-comfy:dev-base
+11. sudo docker login -u "seethroughlab" docker.io
+12. sudo docker push seethroughlab/runpod-worker-comfy:dv0.1
 
 
 
