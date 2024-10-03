@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   comfyui:
-    image: seethroughlab/runpod-worker-comfy:dev-mount
+    image: seethroughlab/runpod-worker-comfy:v0.1
     container_name: comfyui-worker
     environment:
       - NVIDIA_VISIBLE_DEVICES=all

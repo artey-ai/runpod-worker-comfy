@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y \
     python3.10 \
     python3-pip \
     git \
-    wget \
-    rsync
+    wget
 
 # Clean up to reduce image size
 RUN apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
@@ -41,7 +40,8 @@ RUN python3 /comfyui/custom_nodes/ComfyUI-Impact-Pack/install.py
 
 # Install comfyui_controlnet_aux
 RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git /comfyui/custom_nodes/comfyui_controlnet_aux
-RUN pip3 install -r /comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt
+RUN pip3 install -r /comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt  
+ADD data/depth_anything_v2_vitl.pth /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large/
 
 # Install comfyui_face_parsing
 RUN git clone https://github.com/Ryuukeisyou/comfyui_face_parsing.git /comfyui/custom_nodes/comfyui_face_parsing
@@ -134,4 +134,4 @@ RUN chmod +x /start.sh
 #COPY --from=downloader /comfyui/models /comfyui/models
 
 # Start the container
-CMD /start.sh
+CMD ["/start.sh"]
