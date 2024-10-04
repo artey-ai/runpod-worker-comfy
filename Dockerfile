@@ -28,9 +28,13 @@ WORKDIR /comfyui
 RUN pip3 install --upgrade --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121 \
     && pip3 install --upgrade -r requirements.txt
 
-# Install ComfyUI-Manager
+# Install ComfyUI-Manager - handy for debugging. Should probably remove for production
 RUN git clone https://github.com/ltdrdata/ComfyUI-Manager.git /comfyui/custom_nodes/ComfyUI-Manager
 RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Manager/requirements.txt
+
+# Install https://github.com/bmad4ever/comfyui_bmad_nodes
+RUN git clone https://github.com/bmad4ever/comfyui_bmad_nodes.git /comfyui/custom_nodes/comfyui_bmad_nodes
+RUN pip3 install -r /comfyui/custom_nodes/comfyui_bmad_nodes/requirements.txt
 
 # Install ComfyUI-Impact-Pack
 RUN git clone https://github.com/ltdrdata/ComfyUI-Impact-Pack.git /comfyui/custom_nodes/ComfyUI-Impact-Pack
@@ -40,10 +44,11 @@ RUN python3 /comfyui/custom_nodes/ComfyUI-Impact-Pack/install.py
 
 # Install comfyui_controlnet_aux
 RUN git clone https://github.com/Fannovel16/comfyui_controlnet_aux.git /comfyui/custom_nodes/comfyui_controlnet_aux
-RUN pip3 install -r /comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt  
-RUN wget -O /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large/depth_anything_v2_vitl.pth \
-    https://huggingface.co/depth-anything/Depth-Anything-V2-Large/resolve/main/depth_anything_v2_vitl.pth
-
+RUN pip3 install --upgrade -r /comfyui/custom_nodes/comfyui_controlnet_aux/requirements.txt  
+RUN mkdir -p /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large
+ADD data/depth_anything_v2_vitl.pth /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large/
+#RUN wget -O /comfyui/custom_nodes/comfyui_controlnet_aux/ckpts/depth-anything/Depth-Anything-V2-Large/depth_anything_v2_vitl.pth \
+#    https://huggingface.co/depth-anything/Depth-Anything-V2-Large/resolve/main/depth_anything_v2_vitl.pth
 
 # Install comfyui_face_parsing
 RUN git clone https://github.com/Ryuukeisyou/comfyui_face_parsing.git /comfyui/custom_nodes/comfyui_face_parsing
@@ -57,6 +62,10 @@ RUN wget -P /comfyui/models/face_parsing/ \
 # install ComfyUI-SAM2
 RUN git clone https://github.com/neverbiasu/ComfyUI-SAM2.git /comfyui/custom_nodes/ComfyUI-SAM2
 RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-SAM2/requirements.txt
+
+# install https://github.com/storyicon/comfyui_segment_anything.git
+#RUN git clone https://github.com/storyicon/comfyui_segment_anything.git /comfyui/custom_nodes/comfyui_segment_anything
+#RUN pip3 install -r /comfyui/custom_nodes/comfyui_segment_anything/requirements.txt
 
 # install was-node-suite-comfyui
 RUN git clone https://github.com/WASasquatch/was-node-suite-comfyui.git /comfyui/custom_nodes/was-node-suite-comfyui
@@ -74,7 +83,8 @@ RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt
 RUN git clone https://github.com/crystian/ComfyUI-Crystools.git /comfyui/custom_nodes/ComfyUI-Crystools
 RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Crystools/requirements.txt
 
-# Clone other custom nodes (with no requirements)
+# Clone other custom nodes (with no requirements or additional setup)
+RUN git clone https://github.com/M1kep/ComfyLiterals.git /comfyui/custom_nodes/ComfyLiterals
 RUN git clone https://github.com/kijai/ComfyUI-IC-Light.git /comfyui/custom_nodes/ComfyUI-IC-Light
 RUN git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git /comfyui/custom_nodes/ComfyUI_IPAdapter_plus
 RUN git clone https://github.com/sipherxyz/comfyui-art-venture.git /comfyui/custom_nodes/comfyui-art-venture
@@ -83,7 +93,7 @@ RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes
 RUN git clone https://github.com/risunobushi/comfyUI_FrequencySeparation_RGB-HSV.git /comfyui/custom_nodes/comfyUI_FrequencySeparation_RGB-HSV
 
 # Copy some images for testing
-ADD test_resources/images/bear.jpg test_resources/images/brad.jpg test_resources/images/ws.jpg /comfyui/input/
+ADD test_resources/images/fockers.jpg test_resources/images/brad.jpg test_resources/images/ws.jpg /comfyui/input/
 
 
 # Install runpod
