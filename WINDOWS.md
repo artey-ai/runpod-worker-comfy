@@ -9,10 +9,10 @@
 6. Install CUDA: https://documentation.ubuntu.com/wsl/en/latest/tutorials/gpu-cuda/
 7. Clone the docker image repo: git clone https://github.com/seethroughlab/runpod-worker-comfy.git
 8. cd runpod-worker-comfy
-9. sudo docker build --no-cache -t seethroughlab/runpod-worker-comfy:v0.2 --platform linux/amd64 .
+9. sudo docker build --no-cache -t seethroughlab/runpod-worker-comfy:v0.3 --platform linux/amd64 .
 10. sudo docker-compose up
 11. sudo docker login -u "seethroughlab" docker.io
-12. sudo docker push seethroughlab/runpod-worker-comfy:v0.2
+12. sudo docker push seethroughlab/runpod-worker-comfy:v0.3
 
 
 

@@ -83,6 +83,11 @@ RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-KJNodes/requirements.txt
 RUN git clone https://github.com/crystian/ComfyUI-Crystools.git /comfyui/custom_nodes/ComfyUI-Crystools
 RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Crystools/requirements.txt
 
+# Install ComfyUI-Inspyrenet-Rembg
+RUN git clone https://github.com/john-mnz/ComfyUI-Inspyrenet-Rembg.git /comfyui/custom_nodes/ComfyUI-Inspyrenet-Rembg
+RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Inspyrenet-Rembg/requirements.txt
+
+
 # Clone other custom nodes (with no requirements or additional setup)
 RUN git clone https://github.com/M1kep/ComfyLiterals.git /comfyui/custom_nodes/ComfyLiterals
 RUN git clone https://github.com/kijai/ComfyUI-IC-Light.git /comfyui/custom_nodes/ComfyUI-IC-Light
@@ -91,6 +96,8 @@ RUN git clone https://github.com/sipherxyz/comfyui-art-venture.git /comfyui/cust
 RUN git clone https://github.com/jamesWalker55/comfyui-various.git /comfyui/custom_nodes/comfyui-various
 RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy
 RUN git clone https://github.com/risunobushi/comfyUI_FrequencySeparation_RGB-HSV.git /comfyui/custom_nodes/comfyUI_FrequencySeparation_RGB-HSV
+RUN git clone https://github.com/tsogzark/ComfyUI-load-image-from-url.git /comfyui/custom_nodes/ComfyUI-load-image-from-url
+
 
 # Copy some images for testing
 ADD test_resources/images/fockers.jpg test_resources/images/brad.jpg test_resources/images/ws.jpg /comfyui/input/
