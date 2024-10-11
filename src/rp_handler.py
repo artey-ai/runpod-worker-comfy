@@ -9,6 +9,7 @@ import requests
 import base64
 from io import BytesIO
 
+
 # Time to wait between API check attempts in milliseconds
 COMFY_API_AVAILABLE_INTERVAL_MS = 50
 # Maximum number of API check attempts
@@ -325,12 +326,16 @@ def handler(job):
     try:
         while retries < COMFY_POLLING_MAX_RETRIES:
             history = get_history(prompt_id)
-
+            
             # Exit the loop if we have found the history
-            if prompt_id in history and history[prompt_id].get("outputs"):
-                print(f"runpod-worker-comfy - found history with outputs")
-                print(history[prompt_id].get("outputs"))
-                break
+            if prompt_id in history:
+                    status = history[prompt_id].get("status")
+                    if status["status_str"]=="error":
+                        return status.get("messages")
+                    if history[prompt_id].get("outputs"):
+                        print(f"runpod-worker-comfy - found history with outputs")
+                        print(history[prompt_id].get("outputs"))
+                        break
             else:
                 # Wait before trying again
                 time.sleep(COMFY_POLLING_INTERVAL_MS / 1000)
