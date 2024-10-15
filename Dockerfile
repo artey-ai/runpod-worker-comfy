@@ -59,14 +59,6 @@ RUN wget -P /comfyui/models/face_parsing/ \
     https://huggingface.co/jonathandinu/face-parsing/resolve/main/preprocessor_config.json \
     https://huggingface.co/jonathandinu/face-parsing/resolve/main/config.json
 
-# install ComfyUI-SAM2
-RUN git clone https://github.com/neverbiasu/ComfyUI-SAM2.git /comfyui/custom_nodes/ComfyUI-SAM2
-RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-SAM2/requirements.txt
-
-# install https://github.com/storyicon/comfyui_segment_anything.git
-#RUN git clone https://github.com/storyicon/comfyui_segment_anything.git /comfyui/custom_nodes/comfyui_segment_anything
-#RUN pip3 install -r /comfyui/custom_nodes/comfyui_segment_anything/requirements.txt
-
 # install was-node-suite-comfyui
 RUN git clone https://github.com/WASasquatch/was-node-suite-comfyui.git /comfyui/custom_nodes/was-node-suite-comfyui
 RUN pip3 install -r /comfyui/custom_nodes/was-node-suite-comfyui/requirements.txt
@@ -87,6 +79,19 @@ RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Crystools/requirements.txt
 RUN git clone https://github.com/john-mnz/ComfyUI-Inspyrenet-Rembg.git /comfyui/custom_nodes/ComfyUI-Inspyrenet-Rembg
 RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Inspyrenet-Rembg/requirements.txt
 
+#install ComfyUI-Image-Filters
+RUN git clone https://github.com/spacepxl/ComfyUI-Image-Filters.git /comfyui/custom_nodes/ComfyUI-Image-Filters
+RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-Image-Filters/requirements.txt
+
+# install ComfyUI-SAM2
+# RUN git clone https://github.com/neverbiasu/ComfyUI-SAM2.git /comfyui/custom_nodes/ComfyUI-SAM2
+# RUN pip3 install -r /comfyui/custom_nodes/ComfyUI-SAM2/requirements.txt
+
+# Install https://github.com/storyicon/comfyui_segment_anything.git
+
+RUN git clone https://github.com/storyicon/comfyui_segment_anything.git /comfyui/custom_nodes/comfyui_segment_anything
+RUN pip3 install --upgrade -r /comfyui/custom_nodes/comfyui_segment_anything/requirements.txt
+
 
 # Clone other custom nodes (with no requirements or additional setup)
 RUN git clone https://github.com/M1kep/ComfyLiterals.git /comfyui/custom_nodes/ComfyLiterals
@@ -97,6 +102,9 @@ RUN git clone https://github.com/jamesWalker55/comfyui-various.git /comfyui/cust
 RUN git clone https://github.com/rgthree/rgthree-comfy.git /comfyui/custom_nodes/rgthree-comfy
 RUN git clone https://github.com/risunobushi/comfyUI_FrequencySeparation_RGB-HSV.git /comfyui/custom_nodes/comfyUI_FrequencySeparation_RGB-HSV
 RUN git clone https://github.com/tsogzark/ComfyUI-load-image-from-url.git /comfyui/custom_nodes/ComfyUI-load-image-from-url
+
+# https://github.com/storyicon/comfyui_segment_anything/issues/88
+RUN pip3 install 'timm==1.0.9' 
 
 
 # Copy some images for testing
