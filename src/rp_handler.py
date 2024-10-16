@@ -103,7 +103,7 @@ def check_server(url, retries=500, delay=50):
 
 def upload_images(images):
     """
-    Upload a list of base64 encoded images to the ComfyUI server using the /upload/image endpoint.
+    Upload a list of base64 encoded images or URLs to the ComfyUI server using the /upload/image endpoint.
 
     Args:
         images (list): A list of dictionaries, each containing the 'name' of the image and the 'image' as a base64 encoded string.
@@ -117,13 +117,23 @@ def upload_images(images):
 
     responses = []
     upload_errors = []
-
+    
     print(f"runpod-worker-comfy - image(s) upload")
 
     for image in images:
         name = image["name"]
         image_data = image["image"]
-        blob = base64.b64decode(image_data)
+        blob = None
+        
+        if image_data.startswith("http"):
+            response = requests.get(image_data)
+            if response.status_code == 200:
+                blob = response.content
+            else:
+                upload_errors.append(f"Error downloading {name}: {response.text}")
+                continue
+        else:    
+            blob = base64.b64decode(image_data)
 
         # Prepare the form data
         files = {
