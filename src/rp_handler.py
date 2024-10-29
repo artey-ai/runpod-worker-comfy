@@ -1,14 +1,15 @@
 import runpod
 from runpod.serverless.utils import rp_upload
 import json
-import urllib.request
-import urllib.parse
+#import urllib.request
+#import urllib.parse
 import time
 import os
 import requests
 import base64
 from io import BytesIO
-
+# from requests.adapters import HTTPAdapter
+# from urllib3.util.retry import Retry
 
 # Time to wait between API check attempts in milliseconds
 COMFY_API_AVAILABLE_INTERVAL_MS = 50
@@ -23,6 +24,25 @@ COMFY_HOST = "127.0.0.1:8188"
 # Enforce a clean state after each job is done
 # see https://docs.runpod.io/docs/handler-additional-controls#refresh-worker
 REFRESH_WORKER = os.environ.get("REFRESH_WORKER", "false").lower() == "true"
+
+
+# # Define a retry strategy
+# retry_strategy = Retry(
+#     total=5,  # Number of retry attempts
+#     backoff_factor=1,  # Exponential backoff factor (1 second, then 2, then 4, etc.)
+#     status_forcelist=[429, 500, 502, 503, 504],  # Retry on these HTTP status codes
+#     method_whitelist=["HEAD", "GET", "OPTIONS"]  # Methods to retry on
+# )
+
+# # Create an adapter with the retry strategy
+# adapter = HTTPAdapter(max_retries=retry_strategy)
+
+# # Create a session and mount the retry strategy on it
+# session = requests.Session()
+# session.mount("https://", adapter)
+# session.mount("http://", adapter)
+
+
 
 
 def validate_input(job_input):
@@ -124,7 +144,7 @@ def upload_images(images):
         name = image["name"]
         image_data = image["image"]
         blob = None
-        
+
         if image_data.startswith("http"):
             response = requests.get(image_data)
             if response.status_code == 200:
@@ -178,9 +198,11 @@ def queue_workflow(workflow):
     # The top level element "prompt" is required by ComfyUI
     data = json.dumps({"prompt": workflow}).encode("utf-8")
 
-    req = urllib.request.Request(f"http://{COMFY_HOST}/prompt", data=data)
-    return json.loads(urllib.request.urlopen(req).read())
+    # req = urllib.request.Request(f"http://{COMFY_HOST}/prompt", data=data)
+    # return json.loads(urllib.request.urlopen(req).read())
 
+    response = requests.post(f"http://{COMFY_HOST}/prompt", data=data)
+    return response.json()
 
 def get_history(prompt_id):
     """
@@ -192,9 +214,12 @@ def get_history(prompt_id):
     Returns:
         dict: The history of the prompt, containing all the processing steps and results
     """
-    with urllib.request.urlopen(f"http://{COMFY_HOST}/history/{prompt_id}") as response:
-        return json.loads(response.read())
 
+    # with urllib.request.urlopen(f"http://{COMFY_HOST}/history/{prompt_id}") as response:
+    #     return json.loads(response.read())
+
+    response = requests.get(f"http://{COMFY_HOST}/history/{prompt_id}")
+    return response.json()
 
 def base64_encode(img_path):
     """
